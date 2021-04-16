@@ -1,20 +1,15 @@
 package utils;
 
 import dto.ItemPair;
-import exceptions.CommonTestException;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static constants.Constants.REAL_ITEM_NAME;
-import static constants.Constants.VIRTUAL_ITEM_NAME;
+import static utils.Constants.REAL_ITEM_NAME;
+import static utils.Constants.VIRTUAL_ITEM_NAME;
 
 public class Utils {
 
@@ -58,18 +53,5 @@ public class Utils {
             cart.addRealItem(realItem);
             count--;
         }
-    }
-
-    public static String readFromInputStream(InputStream inputStream){
-        StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
-            }
-        } catch (IOException e) {
-            throw new CommonTestException("Error to read data from file");
-        }
-        return resultStringBuilder.toString();
     }
 }
