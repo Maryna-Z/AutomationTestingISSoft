@@ -1,4 +1,4 @@
-package tests.junit;
+package tests.unitTests.junit;
 
 import dto.ItemPair;
 import org.junit.jupiter.api.*;

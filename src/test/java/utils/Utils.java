@@ -1,17 +1,25 @@
 package utils;
 
 import dto.ItemPair;
+import parser.NoSuchFileException;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.zip.InflaterInputStream;
 
 import static utils.Constants.REAL_ITEM_NAME;
 import static utils.Constants.VIRTUAL_ITEM_NAME;
 
 public class Utils {
+
+    private static Properties properties = new Properties();
 
     public static int generateRandomValue(int min, int max){
         return (int)(min + Math.random() * max);
@@ -53,5 +61,14 @@ public class Utils {
             cart.addRealItem(realItem);
             count--;
         }
+    }
+
+    public static Properties getProperties(String path) {
+        try (InputStream input = new FileInputStream(path)) {
+            properties.load(input);
+        } catch (IOException ex) {
+            throw new NoSuchFileException("File not found", ex);
+        }
+        return properties;
     }
 }
