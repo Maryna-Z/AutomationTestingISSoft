@@ -9,9 +9,9 @@ public class DriverFactory {
     public static WebDriver getDriver(Config config) {
         switch(config) {
             case CHROME:
-                return ChromeSingleton.getChromeDriver();
+                return ChromeSingleton.getInstance();
             case FF:
-                return FirefoxSingleton.getFirefoxDriver();
+                return FirefoxSingleton.getInstance();
             default:
                 throw null;
         }

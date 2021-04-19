@@ -2,19 +2,16 @@ package tests.tutby;
 
 import driver.Config;
 import driver.DriverFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import web_pages.TutByHomePage;
 
 public class Tests{
-    static WebDriver driver;
+    WebDriver driver;
     TutByHomePage tutByHomePage;
 
-    @BeforeAll
-    public static void initDriver(){
+    @BeforeEach
+    public void initDriver(){
         driver = DriverFactory.getDriver(Config.CHROME);
     }
 
@@ -22,11 +19,11 @@ public class Tests{
     public void verifyAuthorization(){
         tutByHomePage = new TutByHomePage(driver);
         tutByHomePage.loginToSite();
-        Assertions.assertTrue(tutByHomePage.extractUserName().equals("Selenium Test"), "User is authorized");
+        Assertions.assertEquals(tutByHomePage.extractUserName(), "Selenium Test", "User is authorized");
     }
 
-    @AfterAll
-    public static void destroy(){
+    @AfterEach
+    public void destroy(){
         driver.close();
         driver.quit();
     }

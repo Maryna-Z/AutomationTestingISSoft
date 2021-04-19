@@ -14,7 +14,7 @@ public class TutByHomePage {
     private String propertyPath = "src/test/resources/mail.properties";
     private Properties properties = Utils.getProperties(propertyPath);
 
-    @FindBy(linkText = "Войти")
+    @FindBy(css = "div#authorize a")
     private WebElement authLink;
 
     @FindBy(name = "login")

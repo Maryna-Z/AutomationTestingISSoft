@@ -4,23 +4,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class ChromeSingleton {
-    private static ChromeSingleton instance;
-    private static ChromeDriver chromeDriver;
+    private static ChromeDriver instance;
 
-    private ChromeSingleton(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        chromeDriver = new ChromeDriver(options);
-    }
-    private static synchronized ChromeSingleton getInstance(){
+    public static synchronized ChromeDriver getInstance(){
         if (instance == null) {
-            instance = new ChromeSingleton();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            instance = new ChromeDriver(options);
         }
         return instance;
-    }
-
-    public static ChromeDriver getChromeDriver(){
-        getInstance();
-        return chromeDriver;
     }
 }
