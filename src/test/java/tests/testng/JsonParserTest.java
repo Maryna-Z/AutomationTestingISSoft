@@ -1,8 +1,9 @@
 package tests.testng;
 
 import dto.ItemPair;
-import org.junit.jupiter.api.Assertions;
+import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 import parser.JsonParser;
 import parser.NoSuchFileException;
 import shop.Cart;
@@ -19,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static utils.Constants.FILE_NAME_LIST;
 
 public class JsonParserTest {
@@ -45,13 +45,13 @@ public class JsonParserTest {
     @Test(groups = {"goodTests"}, testName = "File exist", dataProvider = "fileNameProvider")
     public void filesExist(List<String> collect1) {
         List<String> collect2 = FILE_NAME_LIST.stream().map(s -> s = s + ".json").collect(Collectors.toList());
-        Assertions.assertTrue(collect1.containsAll(collect2));
+        Assert.assertTrue(collect1.containsAll(collect2));
     }
 
     @Test(groups = "brokenTests", testName = "Quantity of files")
     public void filesQuantity() {
         try {
-            Assertions.assertTrue(Files.list(Paths.get("src/main/resources")).count() >= itemPairs.size());
+            Assert.assertTrue(Files.list(Paths.get("src/main/resources")).count() >= itemPairs.size());
         } catch (IOException ex) {
             throw new NoSuchFileException("Error to read the file", ex);
         }
@@ -61,21 +61,21 @@ public class JsonParserTest {
     @Test(groups = "goodTests", testName = "Saving of Cart with RealItems and VirtualItems")
     public void checkCartItemsSaving(int cart0){
         Cart cart = parser.readFromFile(new File("src/main/resources/" + FILE_NAME_LIST.get(cart0) + ".json"));
-        Assertions.assertAll("Cart name and total price are correct",
-                () -> assertEquals(cart.getCartName(), carts.get(cart0).getCartName(), "Cart name"),
-                () -> assertEquals(cart.getTotalPrice(), carts.get(cart0).getTotalPrice(), "Total price")
-        );
+        SoftAssert softAssert = new SoftAssert();
+        Assert.assertEquals(cart.getCartName(), carts.get(cart0).getCartName(), "Cart name");
+        Assert.assertEquals(cart.getTotalPrice(), carts.get(cart0).getTotalPrice(), "Total price");
+        softAssert.assertAll();
     }
 
     @Test(groups = {"goodTests"}, testName = "Throwing NoSuchFileException")
     public void notSuchException(){
-        Assertions.assertThrows(NoSuchFileException.class,
+        Assert.assertThrows(NoSuchFileException.class,
                 () -> new JsonParser().readFromFile(new File("NoSuchFile.txt")));
     }
 
     @Test(groups = {"goodTests"}, testName = "Parsing wrong file", dataProvider = "fileProvider")
     public void parsingWrongFile(String fileName){
-        Assertions.assertThrows(NoSuchFileException.class,
+        Assert.assertThrows(NoSuchFileException.class,
                 () -> new JsonParser().readFromFile(new File(fileName)));
     }
 
@@ -86,7 +86,7 @@ public class JsonParserTest {
         } catch (IOException ex) {
             throw new NoSuchFileException("Error to write to the file", ex);
         }
-        Assertions.assertThrows(NoSuchFileException.class,
+        Assert.assertThrows(NoSuchFileException.class,
                 () -> new JsonParser().readFromFile(new File(fileName)));
     }
 
