@@ -31,4 +31,6 @@ public interface Constants {
             "Home Design",
             "Affinity Photo")
             .collect(Collectors.toList());
+
+    public static final String FILE_NAME = "marina";
 }

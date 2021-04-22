@@ -1,18 +1,18 @@
 package utils;
 
+import com.google.gson.Gson;
 import dto.ItemPair;
 import parser.NoSuchFileException;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
-
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.zip.InflaterInputStream;
 
 import static utils.Constants.REAL_ITEM_NAME;
 import static utils.Constants.VIRTUAL_ITEM_NAME;
@@ -20,6 +20,7 @@ import static utils.Constants.VIRTUAL_ITEM_NAME;
 public class Utils {
 
     private static Properties properties = new Properties();
+    private static final Gson gson = new Gson();
 
     public static int generateRandomValue(int min, int max){
         return (int)(min + Math.random() * max);
@@ -70,5 +71,27 @@ public class Utils {
             throw new NoSuchFileException("File not found", ex);
         }
         return properties;
+    }
+
+    public static void writeToFile(RealItem realItem) {
+        try (FileWriter writer = new FileWriter("src/main/resources/marina.json")) {
+            writer.write(gson.toJson(realItem));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static RealItem parametrizeRealItem(RealItem realItem, String name, double price, double weight){
+        realItem.setName(name);
+        realItem.setPrice(price);
+        realItem.setWeight(weight);
+        return realItem;
+    }
+
+    public static VirtualItem parametrizeVirtualItem(VirtualItem virtualItem, String name, double price, double sizeOnDisk){
+        virtualItem.setName(name);
+        virtualItem.setPrice(price);
+        virtualItem.setSizeOnDisk(sizeOnDisk);
+        return virtualItem;
     }
 }

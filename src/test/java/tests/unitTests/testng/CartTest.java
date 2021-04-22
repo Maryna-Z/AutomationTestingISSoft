@@ -1,24 +1,24 @@
-package tests.testNg;
+package tests.testng;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
-import tests.testNg.retry.MyRetry;
+import tests.testng.retry.MyRetry;
+import utils.Utils;
 
-import static tests.testNg.JsonParserTest.carts;
+import static tests.testng.JsonParserTest.carts;
 
 public class CartTest {
+
     @Parameters({"cart-number"})
     @Test(groups = {"goodTests"}, testName = "Check addVirtualItem method")
-    public void checkAddVirtualItem(String cartNumber){
-        double originalPrice = carts.get(Integer.valueOf(cartNumber)).getTotalPrice();
+    public void checkAddVirtualItem(int argument){
+        double originalPrice = carts.get(argument).getTotalPrice();
         VirtualItem virtualItem = new VirtualItem();
-        virtualItem.setName("Home Design");
-        virtualItem.setPrice(98.00);
-        virtualItem.setSizeOnDisk(190.00);
-        Cart cart = carts.get(Integer.valueOf(cartNumber));
+        Utils.parametrizeVirtualItem(virtualItem, "Home Design", 98.00, 190.00);
+        Cart cart = carts.get(argument);
         cart.addVirtualItem(virtualItem);
 
         assert(cart.getTotalPrice() == originalPrice + virtualItem.getPrice()*1.2);
@@ -30,9 +30,7 @@ public class CartTest {
         double totalPrice = 0.d;
         Cart cart = carts.get(argument);
         VirtualItem virtualItem = new VirtualItem();
-        virtualItem.setName("Home Design");
-        virtualItem.setPrice(98.00);
-        virtualItem.setSizeOnDisk(190.00);
+        Utils.parametrizeVirtualItem(virtualItem, "Home Design", 98.00, 190.00);
         cart.addVirtualItem(virtualItem);
         totalPrice=cart.getTotalPrice();
         cart.deleteVirtualItem(virtualItem);
@@ -44,9 +42,7 @@ public class CartTest {
     public void checkAddRealItem(int argument){
         double originalPrice = carts.get(argument).getTotalPrice();
         RealItem realItem = new RealItem();
-        realItem.setName("Audi");
-        realItem.setPrice(25698.00);
-        realItem.setWeight(1900.03);
+        Utils.parametrizeRealItem(realItem, "Audi", 25698.00, 1900.03);
         Cart cart = carts.get(argument);
         cart.addRealItem(realItem);
 
@@ -54,14 +50,12 @@ public class CartTest {
     }
 
     @Parameters({"cart-number"})
-    @Test(groups = {"goodTests"}, testName = "Check deleteRealItem method", retryAnalyzer = MyRetry.class)
+    @Test(groups = {"goodTests"}, testName = "Check deleteRealItem method")
     public void checkDeleteRealItem(int argument){
         double totalPrice = 0.d;
         Cart cart = carts.get(argument);
         RealItem realItem = new RealItem();
-        realItem.setName("Audi");
-        realItem.setPrice(25698.00);
-        realItem.setWeight(1900.03);
+        Utils.parametrizeRealItem(realItem, "Audi", 25698.00, 1900.03);
         cart.addRealItem(realItem);
         totalPrice=cart.getTotalPrice();
         cart.deleteRealItem(realItem);
