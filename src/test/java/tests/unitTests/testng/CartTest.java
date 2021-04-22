@@ -1,5 +1,6 @@
 package tests.testng;
 
+import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import shop.Cart;
@@ -21,7 +22,7 @@ public class CartTest {
         Cart cart = carts.get(argument);
         cart.addVirtualItem(virtualItem);
 
-        assert(cart.getTotalPrice() == originalPrice + virtualItem.getPrice()*1.2);
+        Assert.assertTrue(cart.getTotalPrice() == originalPrice + virtualItem.getPrice()*1.2);
     }
 
     @Parameters({"cart-number"})
@@ -34,7 +35,7 @@ public class CartTest {
         cart.addVirtualItem(virtualItem);
         totalPrice=cart.getTotalPrice();
         cart.deleteVirtualItem(virtualItem);
-        assert(totalPrice > cart.getTotalPrice());
+        Assert.assertTrue(totalPrice > cart.getTotalPrice());
     }
 
     @Parameters({"cart-number"})
@@ -45,8 +46,7 @@ public class CartTest {
         Utils.parametrizeRealItem(realItem, "Audi", 25698.00, 1900.03);
         Cart cart = carts.get(argument);
         cart.addRealItem(realItem);
-
-        assert(cart.getTotalPrice() == originalPrice + realItem.getPrice()*1.2);
+        Assert.assertEquals(cart.getTotalPrice(),originalPrice + realItem.getPrice()*1.2);
     }
 
     @Parameters({"cart-number"})
@@ -59,6 +59,6 @@ public class CartTest {
         cart.addRealItem(realItem);
         totalPrice=cart.getTotalPrice();
         cart.deleteRealItem(realItem);
-        assert(totalPrice > cart.getTotalPrice());
+        Assert.assertTrue(totalPrice > cart.getTotalPrice());
     }
 }

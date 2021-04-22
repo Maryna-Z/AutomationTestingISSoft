@@ -2,6 +2,7 @@
 
 <suite name="OnlineShop" verbose="1" >
     <parameter name="cart0" value="0"/>
+    <parameter name="cart-number" value="5"/>
     <test name="JsonParser" >
         <groups>
             <run>
