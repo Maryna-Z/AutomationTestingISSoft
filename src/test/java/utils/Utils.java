@@ -1,10 +1,13 @@
 package utils;
 
+import com.google.gson.Gson;
 import dto.ItemPair;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,8 @@ import static utils.Constants.REAL_ITEM_NAME;
 import static utils.Constants.VIRTUAL_ITEM_NAME;
 
 public class Utils {
+
+    private static final Gson gson = new Gson();
 
     public static int generateRandomValue(int min, int max){
         return (int)(min + Math.random() * max);
@@ -52,6 +57,14 @@ public class Utils {
 
             cart.addRealItem(realItem);
             count--;
+        }
+    }
+
+    public static void writeToFile(RealItem realItem) {
+        try (FileWriter writer = new FileWriter("src/main/resources/marina.json")) {
+            writer.write(gson.toJson(realItem));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
