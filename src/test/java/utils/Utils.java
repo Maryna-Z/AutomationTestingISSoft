@@ -67,4 +67,18 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static RealItem parametrizeRealItem(RealItem realItem, String name, double price, double weight){
+        realItem.setName(name);
+        realItem.setPrice(price);
+        realItem.setWeight(weight);
+        return realItem;
+    }
+
+    public static VirtualItem parametrizeVirtualItem(VirtualItem virtualItem, String name, double price, double sizeOnDisk){
+        virtualItem.setName(name);
+        virtualItem.setPrice(price);
+        virtualItem.setSizeOnDisk(sizeOnDisk);
+        return virtualItem;
+    }
 }
