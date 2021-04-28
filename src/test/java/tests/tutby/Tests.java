@@ -1,7 +1,7 @@
 package tests.tutby;
 
 import driver.Config;
-import driver.DriverFactory;
+import driver.DriverSingleton;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import web_pages.TutByHomePage;
@@ -12,7 +12,7 @@ public class Tests{
 
     @BeforeEach
     public void initDriver(){
-        driver = DriverFactory.getDriver(Config.CHROME);
+        driver = DriverSingleton.getInstance().getDriver(Config.CHROME);
     }
 
     @Test

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
-import tests.testNg.retry.MyRetry;
+import tests.unitTests.testNg.retry.MyRetry;
 import utils.Utils;
 
 import static tests.unitTests.testNg.JsonParserTest.carts;
