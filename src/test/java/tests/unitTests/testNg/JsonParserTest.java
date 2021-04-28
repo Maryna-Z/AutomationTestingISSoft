@@ -1,4 +1,4 @@
-package tests.unitTests.testng;
+package tests.unitTests.testNg;
 
 import dto.ItemPair;
 import org.testng.Assert;
