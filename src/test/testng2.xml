@@ -12,8 +12,8 @@
             </run>
         </groups>
         <classes>
-            <class name="tests.testng.JsonParserTest"/>
-            <class name="tests.testng.CartTest"/>
+            <class name="tests.unitTests.testNg.JsonParserTest"/>
+            <class name="tests.unitTests.testNg.CartTest"/>
         </classes>
     </test>
 </suite>

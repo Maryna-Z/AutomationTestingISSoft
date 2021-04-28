@@ -1,4 +1,4 @@
-package tests.testNg;
+package tests.unitTests.testNg;
 
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
@@ -9,7 +9,8 @@ import shop.VirtualItem;
 import tests.testNg.retry.MyRetry;
 import utils.Utils;
 
-import static tests.testNg.JsonParserTest.carts;
+import static tests.unitTests.testNg.JsonParserTest.carts;
+
 
 public class CartTest {
 
