@@ -1,30 +1,16 @@
 package tests.tutby;
 
-import driver.Config;
-import driver.DriverSingleton;
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import web_pages.TutByHomePage;
 
-public class Tests{
-    WebDriver driver;
-    TutByHomePage tutByHomePage;
-
-    @BeforeEach
-    public void initDriver(){
-        driver = DriverSingleton.getInstance().getDriver(Config.CHROME);
-    }
+public class Tests extends BaseStep{
+    private TutByHomePage tutByHomePage;
 
     @Test
     public void verifyAuthorization(){
         tutByHomePage = new TutByHomePage(driver);
         tutByHomePage.loginToSite();
         Assertions.assertEquals(tutByHomePage.extractUserName(), "Selenium Test", "User is authorized");
-    }
-
-    @AfterEach
-    public void destroy(){
-        driver.close();
-        driver.quit();
     }
 }
