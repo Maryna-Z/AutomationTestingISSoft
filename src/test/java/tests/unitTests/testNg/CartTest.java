@@ -11,7 +11,6 @@ import utils.Utils;
 
 import static tests.unitTests.testNg.JsonParserTest.carts;
 
-
 public class CartTest {
 
     @Parameters({"cart-number"})

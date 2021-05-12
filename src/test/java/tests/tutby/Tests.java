@@ -1,21 +1,14 @@
 package tests.tutby;
 
-import driver.Config;
-import driver.DriverSingleton;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.WebDriver;
 import web_pages.TutByHomePage;
 
-public class Tests{
-    WebDriver driver;
-    TutByHomePage tutByHomePage;
-
-    @BeforeEach
-    public void initDriver(){
-        driver = DriverSingleton.getInstance().getDriver(Config.FF);
-    }
+public class Tests extends BaseStep{
+    private TutByHomePage tutByHomePage;
 
     @Test
     @DisplayName("Verify Authorization")
@@ -32,12 +25,6 @@ public class Tests{
         tutByHomePage = new TutByHomePage(driver);
         tutByHomePage.loginToSiteWithParameters(loginValue, passwordValue);
         Assertions.assertEquals(tutByHomePage.extractUserName(), "Selenium Test", "User is authorized");
-    }
-
-    @AfterEach
-    public void destroy(){
-        driver.close();
-        driver.quit();
     }
 }
 //src/test/resources/credentials.csv
