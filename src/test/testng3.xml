@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="OnlineShop" verbose="1" >
+    <parameter name="items-size" value="6"/>
+    <parameter name="cart0" value="0"/>
+    <parameter name="cart-number" value="5"/>
+    <test name="JsonParser" >
+        <groups>
+            <run>
+                <include name="goodTests"/>
+                <exclude name="brokenTests"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.unitTests.testNg.JsonParserTest"/>
+            <class name="tests.unitTests.testNg.ItemsTest"/>
+        </classes>
+    </test>
+</suite>
