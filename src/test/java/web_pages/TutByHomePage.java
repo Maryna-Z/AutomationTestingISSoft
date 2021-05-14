@@ -1,9 +1,7 @@
 package web_pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import utils.Utils;
 
 import java.util.Properties;
@@ -13,35 +11,28 @@ public class TutByHomePage {
     private String propertyPath = "src/test/resources/mail.properties";
     private Properties properties = Utils.getProperties(propertyPath);
 
-    @FindBy(css = "div#authorize a")
-    private WebElement authLink;
-
-    @FindBy(name = "login")
-    private WebElement login;
-
-    @FindBy(name = "password")
-    private WebElement password;
-
-    @FindBy(xpath = "//input[contains(@class, 'auth__enter')]")
-    private WebElement enter;
-
-    @FindBy(className = "uname")
-    private WebElement userName;
-
     public TutByHomePage(WebDriver driver){
         this.driver = driver;
-        PageFactory.initElements(this.driver, this);
     }
 
     public void loginToSite(){
         driver.get("https://www.tut.by");
-        authLink.click();
-        login.sendKeys(properties.getProperty("USER_NAME"));
-        password.sendKeys(properties.getProperty("PASSWORD"));
-        enter.click();
+        driver.findElement(By.cssSelector("div#authorize a")).click();
+        driver.findElement(By.name("login")).sendKeys(properties.getProperty("USER_NAME"));
+        driver.findElement(By.name("password")).sendKeys(properties.getProperty("PASSWORD"));
+        driver.findElement(By.xpath("//input[contains(@class, 'auth__enter')]")).click();
+    }
+
+    public void logOutFromSite(){
+        driver.findElement(By.cssSelector("a.logedin")).click();
+        driver.findElement(By.cssSelector("div.b-popup-i a.button")).click();
     }
 
     public String extractUserName(){
-        return userName.getText();
+        return driver.findElement(By.className("uname")).getText();
+    }
+
+    public Boolean authLinkIsDisplayed(){
+        return driver.findElement(By.cssSelector("div#authorize a")).isDisplayed();
     }
 }
