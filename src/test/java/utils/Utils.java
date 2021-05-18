@@ -2,20 +2,24 @@ package utils;
 
 import com.google.gson.Gson;
 import dto.ItemPair;
+import parser.NoSuchFileException;
 import shop.Cart;
 import shop.RealItem;
 import shop.VirtualItem;
-
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import static utils.Constants.REAL_ITEM_NAME;
 import static utils.Constants.VIRTUAL_ITEM_NAME;
 
 public class Utils {
 
+    private static Properties properties = new Properties();
     private static final Gson gson = new Gson();
 
     public static int generateRandomValue(int min, int max){
@@ -58,6 +62,15 @@ public class Utils {
             cart.addRealItem(realItem);
             count--;
         }
+    }
+
+    public static Properties getProperties(String path) {
+        try (InputStream input = new FileInputStream(path)) {
+            properties.load(input);
+        } catch (IOException ex) {
+            throw new NoSuchFileException("File not found", ex);
+        }
+        return properties;
     }
 
     public static void writeToFile(RealItem realItem) {

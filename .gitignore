@@ -13,6 +13,3 @@ hs_err_pid*
 .idea/
 target/
 *.iml
-
-testng
-testng1.xml
