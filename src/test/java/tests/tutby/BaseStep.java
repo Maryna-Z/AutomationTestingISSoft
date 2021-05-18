@@ -2,20 +2,22 @@ package tests.tutby;
 
 import driver.Config;
 import driver.DriverSingleton;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
 public class BaseStep {
-    WebDriver driver;
+    static WebDriver driver;
 
-    @BeforeEach
-    public void initDriver(){
+    @BeforeAll
+    public static void initDriver(){
         driver = DriverSingleton.getInstance().getDriver(Config.CHROME);
     }
 
-    @AfterEach
-    public void destroy(){
+    @AfterAll
+    public static void destroy(){
         driver.close();
         driver.quit();
     }

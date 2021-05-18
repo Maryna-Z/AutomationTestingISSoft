@@ -28,6 +28,12 @@ public class TutByHomePage {
     @FindBy(className = "uname")
     private WebElement userName;
 
+    @FindBy(css = "div.b-popup-i a.button")
+    private WebElement logOutButton;
+
+    @FindBy(css = "a.logedin")
+    private WebElement userData;
+
     public TutByHomePage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
@@ -41,7 +47,16 @@ public class TutByHomePage {
         enter.click();
     }
 
+    public void logOutFromSite(){
+        userData.click();
+        logOutButton.click();
+    }
+
     public String extractUserName(){
         return userName.getText();
+    }
+
+    public Boolean authLinkIsDisplayed(){
+        return authLink.isDisplayed();
     }
 }
