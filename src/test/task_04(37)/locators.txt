@@ -1,0 +1,97 @@
+Start page:
+
+a) Search input
+    1) Xpath: *//input[@id="search_from_str"]
+    2) CSS: #search_from_str
+
+b) Find button
+    1) Xpath: //input[@name="search"]
+    2) CSS: input[name="search"]
+
+c) Remember me label
+    1) Xpath: //input[@id="memory"]/following-sibling::label
+    2) CSS: input[id=memory] + label
+
+d) Remember me input
+    1) Xpath: //input[@id="memory"]
+    2) CSS: input[id=memory]
+
+e) Register button
+    1) Xpath: //*[contains(@class, 'auth__reg')]
+    2) CSS: .auth__reg
+
+Email page (switch from full to light version, see screenshot a):
+
+f) Write email button
+    1) Xpath: *//a[contains(@href, '/lite/compose/retpath=%2F')]
+    2) CSS: a[aria-label='Compose']
+
+g) Logout link
+    1) Xpath: *//div[contains(@class, 'right')]//a[contains(@class, 'exit')]
+    2) CSS: div[class*='right'] a[class*='exit']
+
+h) Settings link
+    1) Xpath: *//div[contains(@class, 'header__right')]//a[contains(@class, 'setup')]
+    2) CSS: div[class*='header__right'] a[class*='setup']
+
+i) 1 locator for all 5 elements: Inbox, Sent, Deleted, Spam and Draft links
+    1) Inbox Xpath: //div[contains(@class, 'left')]//a[contains(@href, '/lite/inbox')]
+    2) Sent Xpath: //div[contains(@class, 'left')]//a[contains(@href, '/lite/sent')]
+    3) Delete Xpath: //div[contains(@class, 'left')]//a[contains(@href, '/lite/trash')]
+    4) Spam Xpath: //div[contains(@class, 'left')]//a[contains(@href, '/lite/spam')]
+    5) Draft Xpath: //div[contains(@class, 'left')]//a[contains(@href, '/lite/draft')]
+
+j) 1 locator for all 4 elements: Inbox, Deleted, Spam and Draft links
+    1) Inbox CSS: div[class*='left'] a[href *='/lite/inbox']
+    2) Delete CSS: div[class*='left'] a[href *='/lite/trash']
+    3) Spam CSS: div[class*='left'] a[href *='/lite/spam']
+    4) Draft CSS: div[class*='left'] a[href *='/lite/draft']
+New email page:
+
+k) To input
+    1) Xpath: //input[contains(@name, 'to')]
+    2) CSS: input[name='to']
+
+l) Topic input
+    1) Xpath: //input[contains(@name, 'subj')]
+    2) CSS: input[name *= 'subj']
+
+m) Find button
+    1) Xpath: //input[@name = 'search']
+    2) CSS: input[name = 'search']
+
+n) Add multiple attachments button
+    1) Xpath: //button[@value = 'multy-att']
+    2) CSS: button[value = 'multy-att']
+
+o) 1 locator for all 3 elements: Send, Save and Cancel inputs
+    Send:
+        1) Xpath: //input[@value = 'Send']
+        2) CSS: input[value = 'Send']
+    Save:
+        1) Xpath: //input[@value = 'Save']
+        2) CSS: input[value = 'Save']
+    Cancel:
+        1) Xpath: //input[@value = 'Cancel']
+        2) CSS: input[value = 'Cancel']
+
+p) Update locator (just add any code after it, but initial part must be presented as beginning of locator)
+“.b-compose__filinput[name='to']e” | ”//input[@class='b-compose__file']” to grab all 3 elements: Send, Save and Cancel inputs
+    1) Xpath: //input[@class='b-compose__file']/following-sibling::input
+    2) CSS: .b-compose__file ~ input
+
+q) Update locator (just add any code after it, but initial part must be presented as beginning of locator)
+ “button[name='nosend']” | “//button[@name='nosend']” to grab all 3 elements: Send, Save and Cancel inputs
+    1) Xpath: //button[@name='nosend']/parent::div/following-sibling::input
+              //button[@name='nosend']/following::input[contains(@type, 'submit')]
+    2) CSS:
+
+r) Xpath only. Update locator (just add any code after it, but initial part must be presented as beginning of locator)
+ “//input[contains(@class, 'b-compose__cancel')]” to grab all 2 elements: Send and Save inputs
+    1) Xpath: //input[contains(@class, 'b-compose__cancel')]/preceding-sibling::input[contains(@type, 'submit')]
+
+s) Update locator (just add any code after it, but initial part must be presented as beginning of locator)
+ “.b-buttons>input” | “//div[@class='b-buttons']/input” to grab all 3 elements: Choose Files, Save and Cancel inputs
+    1) Xpath: //div[@class='b-buttons']/input[not(contains(@value,'Send'))]
+    2) CSS: .b-buttons>input:not(input[value='Send'])
+
